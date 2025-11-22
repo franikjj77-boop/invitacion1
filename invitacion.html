@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Invitación de Tematica de 15 Años</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg,#0c0c0c,#1a1a1a);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 750px;
+    margin: 30px auto;
+    background: rgba(0,0,0,0.75);
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255,215,0,0.4);
+  }
+
+  h1 { font-family:'Playfair Display',serif; font-size:2.8em; color:#ffd700; }
+  h2 { font-size:1.4em; color:#d4d4d4; font-weight:300; }
+
+  .details { margin-top:10px; font-size:1.1em; line-height:1.6em; }
+  .highlight { color:#ffd700; font-weight:bold; }
+
+  .map-wrapper { margin:20px 0; }
+  iframe { width:100%; height:300px; border:0; border-radius:15px; }
+
+  .button {
+    margin-top: 25px;
+    padding: 14px 28px;
+    background: #ffd700;
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    transition: 0.3s;
+  }
+
+  .button:hover { background: #ffea78; }
+
+  input[type="number"], input[type="text"] {
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 10px;
+    font-size: 1.1em;
+  }
+
+  /* Contador estilo "cajitas doradas" */
+  #countdown {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .time-box {
+    background: linear-gradient(145deg, #ffd700, #fff3b0);
+    border-radius: 15px;
+    padding: 15px 20px;
+    min-width: 70px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #000;
+    text-shadow: 0 0 8px rgba(255,215,0,0.6);
+    box-shadow: 0 0 15px rgba(255,215,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .time-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,215,0,0.8);
+  }
+
+  /* Parpadeo dorado */
+  .blink {
+    animation: blink-gold 1s infinite alternate;
+  }
+
+  @keyframes blink-gold {
+    0% { box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+    50% { box-shadow: 0 0 30px rgba(255,215,0,1); }
+    100% { box-shadow: 0 0 15px rgba(255,215,0,0.5); }
+  }
+
+  .label {
+    display: block;
+    font-size: 0.6em;
+    margin-top: 5px;
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+
+  @media (max-width:480px){
+    h1{font-size:2.2em;}
+    .details{font-size:1em;}
+    input[type="number"], input[type="text"]{width:90%;}
+    .time-box{min-width:50px; font-size:1.4em; padding:10px 12px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Celebración de 15 Años</h1>
+  <h2>Te invitamos a una noche especial</h2>
+
+  <div class="details">
+    <p>
+      <span class="highlight">Sábado 6 de diciembre</span><br>
+      <span class="highlight">7:00 PM</span><br>
+      <span class="highlight">Ampliación 5 de Mayo, Andador Niños Héroes, Lázaro Cárdenas, Michoacán</span>
+    </p>
+    <p>Será un evento inolvidable. ¡Tu presencia lo hará aún más especial!</p>
+  </div>
+
+  <!-- Contador regresivo estilo cajitas doradas -->
+  <div id="countdown">
+    <div class="time-box" id="days">0<span class="label">Días</span></div>
+    <div class="time-box" id="hours">0<span class="label">Horas</span></div>
+    <div class="time-box" id="minutes">0<span class="label">Minutos</span></div>
+    <div class="time-box" id="seconds">0<span class="label">Segundos</span></div>
+  </div>
+
+  <script>
+    const eventDate = new Date("December 6, 2025 19:00:00").getTime();
+    const countdownBoxes = {
+      days: document.getElementById("days"),
+      hours: document.getElementById("hours"),
+      minutes: document.getElementById("minutes"),
+      seconds: document.getElementById("seconds")
+    };
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "¡El gran día ha llegado!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      countdownBoxes.days.innerHTML = days + '<span class="label">Días</span>';
+      countdownBoxes.hours.innerHTML = hours + '<span class="label">Horas</span>';
+      countdownBoxes.minutes.innerHTML = minutes + '<span class="label">Minutos</span>';
+      countdownBoxes.seconds.innerHTML = seconds + '<span class="label">Segundos</span>';
+
+      // Activar parpadeo dorado si faltan menos de 3 días
+      if (days < 3) {
+        Object.values(countdownBoxes).forEach(box => box.classList.add('blink'));
+      }
+    }, 1000);
+  </script>
+
+  <!-- Mapa -->
+  <div class="map-wrapper">
+    <iframe
+      src="https://www.google.com/maps?q=18.003639,-102.238139&hl=es;z=16&output=embed"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- Formulario -->
+  <form action="guardar_invitado.php" method="POST">
+    <label class="highlight">Nombre completo:</label><br>
+    <input type="text" name="Nombre" placeholder="Ejemplo: María Pérez" required><br>
+
+    <label class="highlight">Número de acompañantes:</label><br>
+    <input type="number" name="Acompañantes" min="0" max="10" required placeholder="Ejemplo: 2"><br>
+
+    <button type="submit" class="button">Confirmar asistencia</button>
+  </form>
+
+</div>
+</body>
+</html>
